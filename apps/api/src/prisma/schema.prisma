@@ -186,6 +186,17 @@ model Notes {
   userId    String
 }
 
+// TODO: for better ticket management, progress monitoring, etc
+// model Tasks {
+//   id        String   @id @default(uuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @default(now())
+//   ticket Ticket @relation(fields: [ticketId], references: [id])
+//   ticketId String
+//   due DateTime
+//   reminder DateTime
+// }
+
 model Todos {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -197,6 +208,21 @@ model Todos {
   userId    String
 }
 
+// TODO: 
+// * create webhook lib to standardize calls and offer more options
+//    * runWebhooks<WebhookDataT>(webhook: string, data:WebhookDataT): Promise<any[]> // axios responses or just status ?
+// * add
+//    method: String @default("POST") // POST | GET | PUT | DELETE 
+//    bodyFormat: String @default("json") // json | yaml | form | url | xml | csv 
+//    includeData: boolean @default(true) // lighter webhook if needed 
+//    parseUrl?: boolean // search for ${data.*} and replace with data
+//    headers?: Json // custom headers
+//    retry?: Int // number of retries
+//    retryDelay?: Int // seconds delay between retries
+// * retry on error
+// * log response status
+//    * error notification
+//    * deactivate if 400 or 500 too many times
 model Webhooks {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -346,7 +372,17 @@ model emailTemplate {
 enum Hook {
   ticket_created
   ticket_status_changed
+  // TODO
+  // ticket_updated
+  // ticket_commented
+  // ticket_completed
 }
+
+// TODO: replace enum with model for configurable statuses
+// model TicketStatus {
+//   name String @id
+//   description String
+// }
 
 enum TicketStatus {
   needs_support
@@ -354,6 +390,12 @@ enum TicketStatus {
   in_review
   done
 }
+
+// TODO: replace enum with model for configurable types
+// model TicketType {
+//   name String @id
+//   description String
+// }
 
 enum TicketType {
   bug

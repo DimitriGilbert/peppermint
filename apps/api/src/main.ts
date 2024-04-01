@@ -73,6 +73,7 @@ server.register(multer.contentParser);
 registerRoutes(server);
 
 server.get("/", async function (request, response) {
+  // TODO: Add a health check on prisma connection
   response.send({ healthy: true });
 });
 
@@ -135,6 +136,7 @@ const start = async () => {
       }
     );
 
+    // TODO: configurable interval
     setInterval(() => getEmails(), 60000); // Call getEmails every minute
   } catch (err) {
     server.log.error(err);
