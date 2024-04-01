@@ -111,6 +111,16 @@ export function ticketRoutes(fastify: FastifyInstance) {
               },
               body: JSON.stringify({
                 data: `Ticket ${ticket.id} created by ${ticket.name} -> ${ticket.email}. Priority -> ${ticket.priority}`,
+                name:ticket.name,
+                title:ticket.title,
+                detail:ticket.detail,
+                email:ticket.email,
+                note:ticket.note,
+                priority:ticket.priority,
+                fromImap:ticket.fromImap,
+                teamId:ticket.teamId,
+                clientId:ticket.clientId,
+                userId:ticket.userId,
               }),
             });
           }
@@ -601,6 +611,17 @@ export function ticketRoutes(fastify: FastifyInstance) {
                 },
                 body: JSON.stringify({
                   data: `Ticket ${ticket.id} created by ${ticket.email}, has had it's status changed to ${s}`,
+                  status:s,
+                  name:ticket.name,
+                  title:ticket.title,
+                  detail:ticket.detail,
+                  email:ticket.email,
+                  note:ticket.note,
+                  priority:ticket.priority,
+                  fromImap:ticket.fromImap,
+                  teamId:ticket.teamId,
+                  clientId:ticket.clientId,
+                  userId:ticket.userId,
                 }),
               });
             }
